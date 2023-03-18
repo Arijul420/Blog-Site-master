@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Blog_Site.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div style="margin-top: 12px;" class="well well-sm">
+        <h2 style="display: inline; ">Featured Blog</h2>
+        <input type="submit" class="btn btn-default pull-right" value="Search">
+        @Html.TextBox("search", null, new { @class = "form-control pull-right", style = "width: 20%;" })
+    </div>
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="@Url.Action("PostDetails", "Home", new { id = item.PostId })"><p class="panel-head text-truncate">@Html.DisplayFor(modelItem => item.PostTitle)</p></a>                  
+                </div>
+                <div class="panel-body">
+                    <small>@Html.DisplayFor(modelItem => item.PostDateTime)</small>
+                    <p class="panel-title text-truncate" style="padding-top:5px;">@Html.DisplayFor(modelItem => item.PostDetails)</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

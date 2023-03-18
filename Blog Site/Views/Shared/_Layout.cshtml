@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img alt="Brand" src="~/Content/images/logo.png" width="22" height="22" style="display: inline-block; vertical-align: text-top; ">
+                </a>
+                @Html.ActionLink("Blog Site", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @if (Session["UserId"] != null)
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Dashboard", "Dashboard", "Home")</li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="float-right">@Html.ActionLink("Logout", "Logout", "Users")</li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        <li>@Html.ActionLink("Create Post", "CreatePost", "Home")</li>
+                    </ul>
+                }
+                else if (Session["AdminId"] != null)
+                {
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="float-right">@Html.ActionLink("Logout", "Logout", "Users")</li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="float-right">@Html.ActionLink("Sign In", "Login", "Users")</li>
+                        <li class="float-right">@Html.ActionLink("Sign Up", "SignUp", "Users")</li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Blog Site Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

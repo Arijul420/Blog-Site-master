@@ -1,0 +1,28 @@
+﻿@model Blog_Site.Models.Post
+
+@{
+    ViewBag.Title = "ManagePost";
+}
+
+<h2>Manage</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h3 style="margin:0px;">@Html.DisplayFor(model => model.PostTitle)</h3>
+        </div>
+        <div class="panel-body">
+            <p class="p-inline">Posted by <span style="color: #0d6efd"> @Html.DisplayFor(model => model.User.UserName)</span></p>
+            <p class="p-inline"> on <i style="color: #000000">@Html.DisplayFor(model => model.PostDateTime)</i></p>
+            <p class="panel-title" style="padding-top:5px;"> @Html.DisplayFor(model => model.PostTopic)</p>
+            <p class="panel-title" style="padding-top:5px;"> @Html.DisplayFor(model => model.PostDetails)</p>
+        </div>
+        <div class="panel-footer">
+            @Html.ActionLink("Approve", "PostApprove", new { id = Model.PostId }) |
+            @Html.ActionLink("Delete", "PostDelete", new { id = Model.PostId })
+        </div>
+    </div>
+</div>

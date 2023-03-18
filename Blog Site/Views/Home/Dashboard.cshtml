@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Blog_Site.Models.Post>
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Pending</h2>
+<h4>Post</h4>
+<hr />
+
+@if (@Model.Count() != 0)
+{
+<div class="row" style="display: flex; display: -webkit-flex; flex-wrap: wrap; ">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <p class="panel-head text-truncate">@Html.DisplayFor(modelItem => item.PostTitle)</p>
+                </div>
+                <div class="panel-body">
+                    <i>@Html.DisplayFor(modelItem => item.PostDateTime)</i>
+                    <p class="panel-title" style="padding-top:10px;">@Html.DisplayFor(modelItem => item.PostDetails)</p>
+                </div>
+                <div class="panel-footer">
+                    @Html.ActionLink("Edit", "EditPost", new { id = item.PostId })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+}
+else {
+    <h4>No Pending Posts.</h4>
+}
+    @if (Enumerable.Count(ViewBag.publishedPost) > 0)
+    {
+        <h2 style="padding-top:30px;">Published</h2>
+        <h4>Post</h4>
+        <hr />
+        <div class="row">
+            @foreach (var published in ViewBag.publishedPost)
+            {
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="@Url.Action("PostDetails", "Home", new { id = published.PostId })"><p class="panel-head text-truncate">@published.PostTitle</p></a>
+                        </div>
+                        <div class="panel-body">
+                            <i>@published.PostDateTime</i>
+                            <p class="panel-title text-truncate">@published.PostDetails</p>
+                        </div>
+                        <div class="panel-footer">
+                            @Html.ActionLink("Edit", "EditPost", new { id = published.PostId })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+

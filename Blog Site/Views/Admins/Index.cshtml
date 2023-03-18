@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Blog_Site.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Home</h2>
+<h4>Admin</h4>
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PostDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostTopic)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostTopic)
+                </td>
+                <td>
+                    @Html.ActionLink("View", "ManagePost", new { id = item.PostId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
